@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eden Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="http://localhost:8080/server.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .login-container {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 26, 64, 0.1);
+            width: 400px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid gold;
+        }
+        
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .login-header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 15px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.2);
+            background-color: white;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 102, 255, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .error-message {
+            color: #f44336;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            padding: 10px;
+            background-color: rgba(244, 67, 54, 0.1);
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+            20%, 40%, 60%, 80% {transform: translateX(5px);}
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 15px;
+            color: var(--primary);
+        }
+
+        .form-control.with-icon {
+            padding-left: 45px;
+        }
+
+        .login-footer {
+            text-align: center;
+            padding-bottom: 20px;
+            color: var(--secondary);
+            font-size: 14px;
+        }
+
+        .version {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <div class="login-header">
+            <h1>Eden Admin Panel</h1>
+            <p>Enter your credentials to continue</p>
+        </div>
+        <div class="login-form">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" name="username" class="form-control with-icon" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" class="form-control with-icon" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div id="errorMessage" class="error-message">
+                    <i class="fas fa-exclamation-circle"></i> Invalid username or password
+                </div>
+            </form>
+        </div>
+        <div class="login-footer">
+            <span class="version">Eden Admin v1.0</span>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for error parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('error') === 'invalid') {
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('loginContainer').classList.add('shake');
+                
+                // Remove shake animation after it completes
+                setTimeout(function() {
+                    document.getElementById('loginContainer').classList.remove('shake');
+                }, 500);
+                
+                // Remove URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            // Handle logout parameter
+            if (urlParams.get('logout') === 'true') {
+                // Clear any existing auth data
+                localStorage.removeItem('auth_token');
+                
+                // Remove URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+            
+            // Check if already logged in via token
+            const authToken = localStorage.getItem('auth_token');
+            if (authToken) {
+                // Verify the token with the server
+                fetch('/verify-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ token: authToken })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Token is valid, redirect to server.html
+                        window.location.href = 'server.html';
+                    } else {
+                        // Token is invalid, remove it
+                        localStorage.removeItem('auth_token');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error verifying token:', error);
+                    localStorage.removeItem('auth_token');
+                });
+            }
+            
+            // Handle form submission
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                
+                // Basic validation
+                if (!username || !password) {
+                    document.getElementById('errorMessage').textContent = 'Username and password are required';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('loginContainer').classList.add('shake');
+                    setTimeout(function() {
+                        document.getElementById('loginContainer').classList.remove('shake');
+                    }, 500);
+                    return;
+                }
+                
+                // Send login request to Node.js server
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Invalid credentials');
+                    }
+                })
+                .then(data => {
+                    if (data.token) {
+                        // Store the auth token
+                        localStorage.setItem('auth_token', data.token);
+                        
+                        // Redirect to server.html
+                        window.location.href = 'server.html';
+                    } else {
+                        throw new Error('No token received');
+                    }
+                })
+                .catch(error => {
+                    console.error('Login error:', error);
+                    document.getElementById('errorMessage').innerHTML = '<i class="fas fa-exclamation-circle"></i> Invalid username or password';
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('loginContainer').classList.add('shake');
+                    setTimeout(function() {
+                        document.getElementById('loginContainer').classList.remove('shake');
+                    }, 500);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
