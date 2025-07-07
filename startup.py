@@ -1816,6 +1816,36 @@ def get_terminal_width():
     except:
         return 100  # Default width
 
+# Add a custom color parser function at the beginning of the file after imports
+def parse_color_tags(text):
+    """
+    Parse color tags in the format {COLOR} and replace with Colorama colors.
+    Example: "This is {RED}red text{RESET} and {BLUE}blue text{RESET}"
+    """
+    color_map = {
+        "{BLACK}": Fore.BLACK,
+        "{RED}": Fore.RED,
+        "{GREEN}": Fore.GREEN,
+        "{YELLOW}": Fore.YELLOW,
+        "{BLUE}": Fore.BLUE,
+        "{MAGENTA}": Fore.MAGENTA,
+        "{CYAN}": Fore.CYAN,
+        "{WHITE}": Fore.WHITE,
+        "{RESET}": Fore.RESET,
+        "{LIGHTBLACK}": Fore.LIGHTBLACK_EX,
+        "{LIGHTRED}": Fore.LIGHTRED_EX,
+        "{LIGHTGREEN}": Fore.LIGHTGREEN_EX,
+        "{LIGHTYELLOW}": Fore.LIGHTYELLOW_EX,
+        "{LIGHTBLUE}": Fore.LIGHTBLUE_EX,
+        "{LIGHTMAGENTA}": Fore.LIGHTMAGENTA_EX,
+        "{LIGHTCYAN}": Fore.LIGHTCYAN_EX,
+        "{LIGHTWHITE}": Fore.LIGHTWHITE_EX
+    }
+    
+    for tag, color in color_map.items():
+        text = text.replace(tag, color)
+    return text
+
 # Function to print banner with connection count
 def print_banner():
     global terminal_width, connected_count
@@ -1823,23 +1853,83 @@ def print_banner():
     clear_screen()
     terminal_width = get_terminal_width()
     
-    # Main banner
-    print(f"{Fore.CYAN}\n")
-    print(f"{Fore.CYAN}  ███████╗██████╗ ███████╗███╗   ██╗     ")
-    print(f"{Fore.CYAN}  ██╔════╝██╔══██╗██╔════╝████╗  ██║    ")
-    print(f"{Fore.CYAN}  █████╗  ██║  ██║█████╗  ██╔██╗ ██║    ")
-    print(f"{Fore.CYAN}  ██╔══╝  ██║  ██║██╔══╝  ██║╚██╗██║     ")
-    print(f"{Fore.CYAN}  ███████╗██████╔╝███████╗██║ ╚████║     ")
-    print(f"{Fore.CYAN}  ╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═══╝     ")
-    print(f"{Fore.YELLOW}\n                      Server & WebSocket Connection Setup Tool")
-    print(f"{Fore.YELLOW}                      ======================================")
-    print(f"{Fore.GREEN}                        Version: 1.0          By: Varun")
-
-    # Show connection details
-    separator = "=" * (terminal_width - 20)
-    print(f"{Fore.YELLOW}\n[{separator}]")
+    # Create stylish banner with colored elements - fixed width for proper alignment
+    banner_lines = [
+        "{CYAN}███████{WHITE}╗{CYAN}██████{WHITE}╗ {CYAN}███████{WHITE}╗{CYAN}███{WHITE}╗   {CYAN}██{WHITE}╗",
+        "{CYAN}██{WHITE}╔════╝{CYAN}██{WHITE}╔══{CYAN}██{WHITE}╗{CYAN}██{WHITE}╔════╝{CYAN}████{WHITE}╗  {CYAN}██{WHITE}║",
+        "{CYAN}█████{WHITE}╗  {CYAN}██{WHITE}║  {CYAN}██{WHITE}║{CYAN}█████{WHITE}╗  {CYAN}██{WHITE}╔{CYAN}██{WHITE}╗ {CYAN}██{WHITE}║",
+        "{CYAN}██{WHITE}╔══╝  {CYAN}██{WHITE}║  {CYAN}██{WHITE}║{CYAN}██{WHITE}╔══╝  {CYAN}██{WHITE}║╚{CYAN}██{WHITE}╗{CYAN}██{WHITE}║",
+        "{CYAN}███████{WHITE}╗{CYAN}██████{WHITE}╔╝{CYAN}███████{WHITE}╗{CYAN}██{WHITE}║ ╚{CYAN}████{WHITE}║",
+        "{WHITE}╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═══╝"
+    ]
     
-    # Display connection status with color based on count
+    # Parse color tags in each line
+    colored_banner_lines = [parse_color_tags(line) for line in banner_lines]
+    
+    # Calculate required width and padding (use the first line for reference)
+    clean_line = re.sub(r'\x1b\[[0-9;]*m', '', colored_banner_lines[0])
+    banner_width = len(clean_line)
+    center_padding = (terminal_width - banner_width) // 2
+    
+    # Print some spacing
+    print("\n")
+    
+    # Print each banner line with consistent padding (using the same center_padding for all lines)
+    for line in colored_banner_lines:
+        print(f"{' ' * center_padding}{line}")
+    
+    # Print a subtle separator (space)
+    print()
+    
+    # Subtitle lines with proper centering and coloring
+    subtitle1 = "{WHITE}Exploit & Dynamic Execution Network"
+    # Replace dots with a solid line in cyan color - make sure it's the same width as the banner
+    subtitle2 = "{CYAN}" + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" 
+    subtitle3 = "{GREEN}Version: 1.0     {GREEN}Linkedin: www.linkedin.com/in/varun--775a77310     {GREEN}By: Varun"
+    
+    # Process subtitles the same way for consistency
+    subtitles = [subtitle1, subtitle2, subtitle3]
+    colored_subtitles = [parse_color_tags(subtitle) for subtitle in subtitles]
+    
+    # Calculate the longest subtitle
+    clean_subtitles = [re.sub(r'\x1b\[[0-9;]*m', '', subtitle) for subtitle in colored_subtitles]
+    max_subtitle_len = max(len(subtitle) for subtitle in clean_subtitles)
+    
+    # If subtitles are wider than the banner, adjust center_padding
+    if max_subtitle_len > banner_width:
+        center_padding = (terminal_width - max_subtitle_len) // 2
+    
+    # Print each subtitle with consistent padding
+    for i, subtitle in enumerate(colored_subtitles):
+        clean_subtitle = re.sub(r'\x1b\[[0-9;]*m', '', subtitle)
+        # Use specific padding for each subtitle type
+        if i == 0 or i == 2:  # Title or version info
+            extra_pad = (max_subtitle_len - len(clean_subtitle)) // 2
+            print(f"{' ' * (center_padding + extra_pad)}{subtitle}")
+        else:  # Center line
+            print(f"{' ' * center_padding}{subtitle}")
+    
+    # Add space before status information
+    print("\n")
+    
+    # Simple centered status information similar to setup.py
+    # Calculate width for status info section
+    info_width = 100
+    status_padding = (terminal_width - info_width) // 2
+    
+    # Create a simple separator line (now white)
+    separator = f"{Fore.WHITE}{'═' * info_width}"
+    print(f"{' ' * status_padding}{separator}")
+    
+    # Format string for consistent display (similar to setup.py)
+    format_str = "{:<20}: {}"
+    
+    # Server status line
+    status_color = Fore.GREEN if server_status == "Running" else Fore.RED
+    server_line = format_str.format(f"{Fore.YELLOW}Server Status", f"{status_color}{server_status}")
+    print(f"{' ' * status_padding}{server_line}")
+    
+    # Connection line with color based on count
     if connected_count == 0:
         connection_color = Fore.RED
     elif connected_count == 1:
@@ -1847,24 +1937,34 @@ def print_banner():
     else:  # 2 or more
         connection_color = Fore.GREEN
     
-    # Format string for consistent display
-    format_str = "{:<20}: {}"
+    connection_line = format_str.format(f"{Fore.YELLOW}Connection", f"{connection_color}{connected_count} ({connected_count} clients)")
+    print(f"{' ' * status_padding}{connection_line}")
     
-    print(format_str.format(f"{Fore.YELLOW}Server Status", f"{Fore.GREEN if server_status == 'Running' else Fore.RED}{server_status}"))
-    print(format_str.format(f"{Fore.YELLOW}Connection", f"{connection_color}{connected_count} ({connected_count} clients)"))
-    
-    # Display URLs
+    # Display URLs when server is running
     if server_status == "Running":
-        if server_mode == "Local":
-            print(format_str.format(f"{Fore.YELLOW}Control Panel", f"{Fore.CYAN}http://localhost:8080/server.html"))
-            print(format_str.format(f"{Fore.YELLOW}JavaScript Tag", f"{Fore.CYAN}<script src=\"http://localhost:8080/eden.js\"></script>"))
-            print(format_str.format(f"{Fore.YELLOW}WebSocket URL", f"{Fore.CYAN}ws://localhost:8080"))
-        else:  # Ngrok mode
-            print(format_str.format(f"{Fore.YELLOW}Control Panel", f"{Fore.MAGENTA}https://{ngrok_url}/server.html"))
-            print(format_str.format(f"{Fore.YELLOW}JavaScript Tag", f"{Fore.MAGENTA}<script src=\"https://{ngrok_url}/eden.js\"></script>"))
-            print(format_str.format(f"{Fore.YELLOW}WebSocket URL", f"{Fore.MAGENTA}wss://{ngrok_url}"))
+        #print(f"{' ' * status_padding}{Fore.WHITE}{'─' * info_width}")
         
-    print(f"{Fore.YELLOW}[{separator}]")
+        if server_mode == "Local":
+            control_panel = f"http://localhost:8080/server.html"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}Control Panel', f'{Fore.CYAN}{control_panel}')}")
+            
+            js_tag = f"<script src=\"http://localhost:8080/eden.js\"></script>"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}JavaScript Tag', f'{Fore.CYAN}{js_tag}')}")
+            
+            ws_url = f"ws://localhost:8080"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}WebSocket URL', f'{Fore.CYAN}{ws_url}')}")
+        else:
+            control_panel = f"https://{ngrok_url}/server.html"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}Control Panel', f'{Fore.MAGENTA}{control_panel}')}")
+            
+            js_tag = f"<script src=\"https://{ngrok_url}/eden.js\"></script>"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}JavaScript Tag', f'{Fore.MAGENTA}{js_tag}')}")
+            
+            ws_url = f"wss://{ngrok_url}"
+            print(f"{' ' * status_padding}{format_str.format(f'{Fore.YELLOW}WebSocket URL', f'{Fore.MAGENTA}{ws_url}')}")
+    
+    # Bottom separator (now white)
+    print(f"{' ' * status_padding}{separator}")
 
 # Function to show syntax
 def show_syntax(command=None):
