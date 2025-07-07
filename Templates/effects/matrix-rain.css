@@ -1,0 +1,138 @@
+/* Eden Custom Matrix Rain Effect
+ * Creates a cascading digital rain effect with customizable properties
+ * Integrated with Eden's effect system for consistent styling
+ */
+
+.eden-custom-effect {
+    --matrix-color: var(--primary-color, #0f0);
+    --fall-speed: var(--animation-speed, 1.5s);
+    --glow-intensity: calc(var(--eden-effect-intensity, 10) * 0.5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.eden-custom-effect::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--matrix-color) 50%,
+        var(--matrix-color) 100%
+    );
+    animation: matrix-fall var(--fall-speed) infinite linear;
+    filter: blur(var(--glow-intensity));
+    opacity: calc(0.7 * var(--eden-effect-opacity, 0.5));
+    box-shadow: 
+        0 0 15px var(--matrix-color),
+        0 0 25px var(--matrix-color),
+        0 0 35px var(--matrix-color);
+}
+
+/* Create multiple rain streams */
+.eden-custom-effect::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 30px,
+        rgba(0, 255, 0, 0.1) 30px,
+        transparent 60px
+    );
+    animation: matrix-scan 3s infinite linear;
+    opacity: calc(0.3 * var(--eden-effect-opacity, 0.5));
+}
+
+/* Digital characters overlay */
+.eden-characters {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: var(--matrix-color);
+    font-family: var(--font-mono, monospace);
+    font-size: var(--font-size-sm, 14px);
+    line-height: 1;
+    white-space: nowrap;
+    text-shadow: 0 0 5px var(--matrix-color);
+    animation: matrix-characters 1s infinite steps(1);
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes matrix-fall {
+    0% {
+        transform: translateY(-100%) translateX(-50%);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100%) translateX(-50%);
+        opacity: 0;
+    }
+}
+
+@keyframes matrix-scan {
+    0% {
+        transform: translateX(-30px);
+    }
+    100% {
+        transform: translateX(30px);
+    }
+}
+
+@keyframes matrix-characters {
+    0% { opacity: 0.7; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.7; }
+}
+
+/* Customization Classes */
+.eden-custom-effect.high-density::before {
+    box-shadow: 
+        25px 0 35px var(--matrix-color),
+        -25px 0 35px var(--matrix-color),
+        50px 0 35px var(--matrix-color),
+        -50px 0 35px var(--matrix-color);
+}
+
+.eden-custom-effect.fast {
+    --fall-speed: 0.8s;
+}
+
+.eden-custom-effect.slow {
+    --fall-speed: 2.2s;
+}
+
+.eden-custom-effect.accent {
+    --matrix-color: var(--accent-color, #0ff);
+}
+
+.eden-custom-effect.highlight {
+    --matrix-color: var(--highlight-color, #f0f);
+}
+
+.eden-custom-effect.cyan {
+    --matrix-color: #0ff;
+}
+
+.eden-custom-effect.purple {
+    --matrix-color: #f0f;
+}

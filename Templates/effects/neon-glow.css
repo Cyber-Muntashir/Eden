@@ -1,0 +1,147 @@
+/* Eden Custom Neon Effect
+ * Creates a pulsating neon glow effect with customizable colors
+ * Integrated with Eden's effect system for consistent styling
+ */
+
+.eden-custom-effect {
+    --neon-primary: var(--primary-color, #0ff);
+    --neon-secondary: var(--accent-color, #f0f);
+    --pulse-speed: var(--animation-speed, 2s);
+    --glow-spread: calc(var(--eden-effect-intensity, 10) * 2px);
+    
+    position: relative;
+    display: inline-block;
+    color: var(--neon-primary);
+    text-shadow:
+        0 0 7px var(--neon-primary),
+        0 0 10px var(--neon-primary),
+        0 0 21px var(--neon-primary),
+        0 0 42px var(--neon-primary);
+    animation: neon-pulse var(--pulse-speed) infinite alternate;
+    opacity: calc(1 * var(--eden-effect-opacity, 0.8));
+}
+
+.eden-custom-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--neon-primary);
+    box-shadow:
+        0 0 var(--glow-spread) var(--neon-primary),
+        0 0 calc(var(--glow-spread) * 2) var(--neon-primary),
+        inset 0 0 calc(var(--glow-spread) / 2) var(--neon-primary);
+    opacity: 0.1;
+    z-index: -1;
+    filter: blur(calc(var(--glow-spread) / 2));
+    animation: neon-flicker 3s infinite;
+}
+
+.eden-custom-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--neon-secondary);
+    box-shadow:
+        0 0 calc(var(--glow-spread) / 2) var(--neon-secondary),
+        0 0 var(--glow-spread) var(--neon-secondary);
+    opacity: 0.05;
+    z-index: -2;
+    filter: blur(var(--glow-spread));
+    animation: neon-shimmer 5s infinite;
+}
+
+@keyframes neon-pulse {
+    0% {
+        text-shadow:
+            0 0 7px var(--neon-primary),
+            0 0 10px var(--neon-primary),
+            0 0 21px var(--neon-primary),
+            0 0 42px var(--neon-primary);
+    }
+    100% {
+        text-shadow:
+            0 0 10px var(--neon-primary),
+            0 0 15px var(--neon-primary),
+            0 0 25px var(--neon-primary),
+            0 0 50px var(--neon-primary);
+    }
+}
+
+@keyframes neon-flicker {
+    0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+        opacity: 0.1;
+    }
+    20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+        opacity: 0.15;
+    }
+}
+
+@keyframes neon-shimmer {
+    0% {
+        transform: translateX(-100%) skewX(-45deg);
+    }
+    50% {
+        transform: translateX(100%) skewX(-45deg);
+    }
+    100% {
+        transform: translateX(-100%) skewX(-45deg);
+    }
+}
+
+/* Preset Intensity Levels */
+.eden-custom-effect.mild {
+    --eden-effect-intensity: 5;
+}
+
+.eden-custom-effect.intense {
+    --eden-effect-intensity: 15;
+}
+
+/* Speed Variations */
+.eden-custom-effect.fast {
+    --animation-speed: 1s;
+}
+
+.eden-custom-effect.slow {
+    --animation-speed: 3s;
+}
+
+/* Preset Color Themes */
+.neon-glow.blue {
+    --neon-color: #0ff;
+    --neon-secondary-color: #08f;
+}
+
+.neon-glow.red {
+    --neon-color: #f66;
+    --neon-secondary-color: #f06;
+}
+
+.neon-glow.green {
+    --neon-color: #0f0;
+    --neon-secondary-color: #0f8;
+}
+
+/* Intensity Variations */
+.neon-glow.intense {
+    --neon-spread: 30px;
+}
+
+.neon-glow.subtle {
+    --neon-spread: 10px;
+}
+
+/* Animation Speed Variations */
+.neon-glow.fast {
+    --neon-pulse-speed: 1s;
+}
+
+.neon-glow.slow {
+    --neon-pulse-speed: 3s;
+}

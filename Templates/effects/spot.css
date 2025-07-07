@@ -1,0 +1,97 @@
+/* Spotlight Effect for Eden Custom Effects
+ * This effect creates a moving spotlight that follows a circular path
+ * The intensity controls the size and brightness of the spotlight
+ */
+
+ .eden-custom-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.85);
+    animation: spotlight-move 15s infinite linear;
+  }
+  
+  .eden-custom-effect::before {
+    content: '';
+    position: absolute;
+    width: calc(100px + var(--eden-effect-intensity, 10) * 15px);
+    height: calc(100px + var(--eden-effect-intensity, 10) * 15px);
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.7) 30%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    border-radius: 50%;
+    filter: blur(calc(var(--eden-effect-intensity, 10) * 1px));
+    opacity: calc(0.6 + var(--eden-effect-opacity, 0.5) * 0.8);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Add a second, smaller spotlight for visual interest */
+  .eden-custom-effect::after {
+    content: '';
+    position: absolute;
+    width: calc(50px + var(--eden-effect-intensity, 10) * 5px);
+    height: calc(50px + var(--eden-effect-intensity, 10) * 5px);
+    background: radial-gradient(
+      circle at center,
+      rgba(200, 220, 255, 0.95) 0%,
+      rgba(200, 220, 255, 0.7) 30%,
+      rgba(200, 220, 255, 0) 70%
+    );
+    border-radius: 50%;
+    filter: blur(calc(var(--eden-effect-intensity, 10) * 0.5px));
+    opacity: calc(0.7 + var(--eden-effect-opacity, 0.5) * 0.6);
+    animation: second-spotlight 20s infinite linear reverse;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  @keyframes spotlight-move {
+    0% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 100% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 0% 100%;
+    }
+    100% {
+      background-position: 0% 0%;
+    }
+  }
+  
+  @keyframes second-spotlight {
+    0% {
+      top: 30%;
+      left: 70%;
+    }
+    25% {
+      top: 70%;
+      left: 30%;
+    }
+    50% {
+      top: 20%;
+      left: 20%;
+    }
+    75% {
+      top: 80%;
+      left: 80%;
+    }
+    100% {
+      top: 30%;
+      left: 70%;
+    }
+  } 
