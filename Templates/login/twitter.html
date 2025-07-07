@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Twitter Login Clone</title>
+  <style>
+    
+    .login-container {
+      background: #192734;
+      border-radius: 16px;
+      padding: 32px;
+      width: 364px;
+      text-align: left;
+    }
+    .logo {
+      margin-bottom: 32px;
+      font-size: 40px;
+      color: #1da1f2;
+      text-align: center;
+    }
+    .form-title {
+      color: #ffffff;
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      border: 1px solid #8899a6;
+      border-radius: 4px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-size: 15px;
+    }
+    .form-group input:focus {
+      border-color: #1da1f2;
+      outline: none;
+    }
+    .form-group input::placeholder {
+      color: #8899a6;
+    }
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background: #1da1f2;
+      color: white;
+      border: none;
+      border-radius: 9999px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+    .login-button:hover {
+      background: #1a91da;
+    }
+    .forgot-password {
+      color: #1da1f2;
+      font-size: 13px;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .signup-text {
+      color: #8899a6;
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .signup-link {
+      color: #1da1f2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">𝕏</div>
+    <div class="form-title">Sign in to X</div>
+    <form>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Phone, email, or username" required/>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required/>
+      </div>
+      <button class="login-button" type="submit">Sign in</button>
+      <a href="#" class="forgot-password">Forgot password?</a>
+      <div class="signup-text">
+        Don't have an account? <a href="#" class="signup-link">Sign up</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

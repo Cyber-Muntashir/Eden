@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Login Clone</title>
+  <style>
+    
+    .login-container {
+      background: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 1px;
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+    }
+    .logo {
+      margin-bottom: 30px;
+      font-size: 40px;
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 500;
+    }
+    .form-group {
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 9px 8px;
+      background: #fafafa;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      box-sizing: border-box;
+      color: #262626;
+      font-size: 14px;
+    }
+    .form-group input:focus {
+      border-color: #a8a8a8;
+      outline: none;
+    }
+    .login-button {
+      width: 100%;
+      padding: 7px;
+      background: #0095f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 14px;
+    }
+    .login-button:hover {
+      background: #0081d6;
+    }
+    .divider {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      color: #8e8e8e;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #dbdbdb;
+    }
+    .divider span {
+      margin: 0 18px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .forgot-password {
+      color: #00376b;
+      font-size: 12px;
+      text-decoration: none;
+      margin-top: 20px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">Instagram</div>
+    <form >
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Phone number, username, or email" required/>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required/>
+      </div>
+      <button class="login-button" type="submit">Log In</button>
+      <div class="divider">
+        <span>OR</span>
+      </div>
+    </form>
+    <a href="#" class="forgot-password">Forgot password?</a>
+  </div>
+</body>
+</html>

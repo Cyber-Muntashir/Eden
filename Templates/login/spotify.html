@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify Login Clone</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+   
+
+    .login-container {
+        background-color: white;
+      width: 450px;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 36px;
+      font-weight: bold;
+      color: #1DB954;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #282828;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #1DB954;
+      outline: none;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .remember-me input {
+      margin-right: 8px;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 14px;
+      background: #1DB954;
+      color: white;
+      border: none;
+      border-radius: 500px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-button:hover {
+      background: #1ed760;
+      transform: scale(1.02);
+    }
+
+    .divider {
+      margin: 20px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .social-login {
+      display: grid;
+      gap: 10px;
+    }
+
+    .social-button {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #282828;
+      border-radius: 500px;
+      background: white;
+      color: #282828;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .social-button:hover {
+      background: #282828;
+      color: white;
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #1DB954;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">Spotify</div>
+    <form>
+      <div class="form-group">
+        <label for="email">Email address or username</label>
+        <input type="text" name="username" id="email" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required/>
+      </div>
+      <div class="remember-me">
+        <input type="checkbox" id="remember"/>
+        <label for="remember">Remember me</label>
+      </div>
+      <button class="login-button" type="submit">LOG IN</button>
+      <div class="divider">or</div>
+      <div class="social-login">
+        <button type="button" class="social-button">Continue with Google</button>
+        <button type="button" class="social-button">Continue with Facebook</button>
+        <button type="button" class="social-button">Continue with Apple</button>
+      </div>
+      <a href="#" class="forgot-password">Forgot your password?</a>
+    </form>
+  </div>
+</body>
+</html>

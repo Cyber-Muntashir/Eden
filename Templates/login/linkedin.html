@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LinkedIn Login Clone</title>
+  <style>
+   
+
+    .login-container {
+        background-color: white;
+      width: 400px;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 32px;
+      font-weight: 600;
+      color: #0a66c2;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.9);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+      font-size: 16px;
+      line-height: 1.33333;
+      color: rgba(0, 0, 0, 0.9);
+    }
+
+    .form-group input:focus {
+      border-color: #0a66c2;
+      box-shadow: 0 0 0 1px #0a66c2;
+      outline: none;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 12px 24px;
+      background: #0a66c2;
+      color: white;
+      border: none;
+      border-radius: 24px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.167s;
+    }
+
+    .login-button:hover {
+      background: #004182;
+    }
+
+    .divider {
+      margin: 16px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 45%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .divider span {
+      background: white;
+      padding: 0 12px;
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+    }
+
+    .social-button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid rgba(0, 0, 0, 0.6);
+      border-radius: 24px;
+      background: white;
+      color: rgba(0, 0, 0, 0.6);
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.167s;
+    }
+
+    .social-button:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: rgba(0, 0, 0, 0.9);
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      color: #0a66c2;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">LinkedIn</div>
+    <form>
+      <div class="form-group">
+        <label for="email">Email or Phone</label>
+        <input type="text" name="username" id="email" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required/>
+      </div>
+      <button class="login-button" type="submit">Sign in</button>
+      <div class="divider">
+        <span>or</span>
+      </div>
+      <button type="button" class="social-button">Sign in with Google</button>
+      <button type="button" class="social-button">Sign in with Apple</button>
+      <a href="#" class="forgot-password">Forgot password?</a>
+    </form>
+  </div>
+</body>
+</html>

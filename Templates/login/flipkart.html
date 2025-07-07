@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flipkart Login Clone</title>
+  <style>
+    .login-container {
+      width: 300px;
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2874f0;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #212121;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #dbdbdb;
+      border-radius: 2px;
+    }
+    .login-button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2874f0;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+    .login-button:hover {
+      background-color: #1c5ad8;
+    }
+    .forgot-password {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .forgot-password a {
+      color: #2874f0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="flipkart-login" name="flipkart-login">
+      <div class="form-group">
+        <label for="email">Email/Mobile number</label>
+        <input type="text" id="email" name="username" required/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required/>
+      </div>
+      <button class="login-button" type="submit">Login</button>
+    </form>
+    <div class="forgot-password">
+      <a href="#">Forgot Password?</a>
+    </div>
+  </div>
+</body>
+</html>

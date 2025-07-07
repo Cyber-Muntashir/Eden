@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Login Clone</title>
+  <style>
+    
+    .login-container {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      width: 396px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      margin-bottom: 20px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #1877f2;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 17px;
+    }
+    .form-group input:focus {
+      border-color: #1877f2;
+      outline: none;
+      box-shadow: 0 0 0 2px #e7f3ff;
+    }
+    .login-button {
+      width: 100%;
+      padding: 12px;
+      background: #1877f2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 20px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+    .login-button:hover {
+      background: #166fe5;
+    }
+    .forgot-password {
+      color: #1877f2;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .divider {
+      border-bottom: 1px solid #dadde1;
+      margin: 20px 0;
+    }
+    .create-account-button {
+      background: #42b72a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: bold;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+    }
+    .create-account-button:hover {
+      background: #36a420;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo">facebook</div>
+    <form>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Email address or phone number" required/>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required/>
+      </div>
+      <button class="login-button" type="submit">Log In</button>
+      <a href="#" class="forgot-password">Forgotten password?</a>
+      <div class="divider"></div>
+      <a href="#" class="create-account-button">Create new account</a>
+    </form>
+  </div>
+</body>
+</html>
